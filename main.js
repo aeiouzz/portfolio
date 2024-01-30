@@ -337,7 +337,7 @@ imgLoad.on('progress', function () { //이미지 로드되는 중간중간 할�
 function updateProgress() {
   let target = (imgLoaded / imgTotal) * 100
   console.log(target)
-  current += (target - current) * 0.01; // 이미지가 더 많으면 로드가 더 되게 값을 늘려준다. ex)0.01
+  current += (target - current) * 0.03; // 이미지가 더 많으면 로드가 더 되게 값을 늘려준다. ex)0.01
 
   progressBar.style.width = current + "%";
   progressText.innerHTML = Math.ceil(current) + "%"; //Math.ceil 올림
