@@ -325,6 +325,7 @@ body {
 .page2 .page2_middle span {
   background-color: pink;
   background-clip: border-box;
+  cursor: pointer;
 }
 
 .page2_hover {
