@@ -4,13 +4,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
 
 @font-face {
-  font-family: 'KIMM_Bold';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'PyeongChangPeace-Bold';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
   font-style: normal;
@@ -23,20 +16,11 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family: 'seolleimcool-SemiBold';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/seolleimcool-SemiBold.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* font-family: 'Montserrat', sans-serif; */
 /* font-family: 'Cormorant Garamond', serif; */
 /* font-family: 'Inter', sans-serif; */
 
-/* #29C1A2
-#5655FF
-#FF718F */
+/* #29C1A2 #5655FF #FF718F */
 
 * {
   margin: 0;
@@ -278,6 +262,7 @@ body {
   position: relative;
   height: 100vh;
   padding-top: 100px;
+  overflow: hidden;
 }
 
 .page2 .page2_top {
@@ -462,6 +447,7 @@ body {
 }
 
 .panel_left {
+  font-family: 'DungGeunMo';
   margin-left: 50px;
   width: 50%;
   text-align: center;
@@ -471,7 +457,7 @@ body {
 }
 
 .panel_leftimg {
-  width: 500px;
+  width: 100%;
   height: 375px;
   transition: 0.3s;
 }
@@ -490,7 +476,7 @@ body {
 }
 
 .panel_name {
-  font-family: 'seolleimcool-SemiBold';
+letter-spacing: 2px;
 }
 
 .panel_birth {
@@ -588,7 +574,7 @@ body {
   transform: translateY(-50%);
   color: #fff;
   font-size: 15px;
-  font-weight: 200;
+  font-weight: 300;
 }
 
 
@@ -798,186 +784,6 @@ body {
 }
 
 
-/* 📍 page7 */
-.page7 {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.page7 {
-  :root {
-    font-size: 16px;
-    font-family: "Oswald", sans-serif;
-    --color-1: hsl(236, 74%, 55%);
-    --color-2: hsl(0, 0%, 95%);
-    --color-21: hsla(0, 0%, 95%, 0.5);
-    --color-3: hsl(0, 0%, 5%);
-    --color-4: hsl(0, 0%, 15%);
-  }
-
-  *,
-  ::after,
-  ::before {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  button,
-  input[type="submit"],
-  input[type="reset"] {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-  }
-
-  .slider-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 70rem;
-    margin: 1rem;
-    border: 3px white solid;
-    padding: 1rem;
-  }
-
-  .title-of-slider {
-    font-weight: 700;
-    letter-spacing: 0.5rem;
-    width: max-content;
-    align-self: flex-start;
-    color: #fff;
-    font-size: clamp(1rem, 4.5vw, 2rem);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .title-of-slider>span {
-    font-weight: 700;
-  }
-
-  #image-container {
-    display: flex;
-    gap: 0.5rem;
-    width: 100%;
-    padding: 0.5rem 0;
-    overflow: hidden;
-  }
-
-  .model-images {
-    flex: none;
-    width: 30%;
-    translate: calc(-100% - 0.5rem);
-  }
-
-  .button-container {
-    display: grid;
-    grid-template-columns: 2.5rem 2.5rem auto 2.5rem 2.5rem;
-    column-gap: 0.1rem;
-    width: 100%;
-    gap: 0.5rem;
-  }
-
-  .button-container>button {
-    position: relative;
-    border: 0.1rem var(--color-2) solid;
-    border-radius: 50%;
-    width: 2.5rem;
-    aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #left-arrow {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  #right-arrow {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  #right-arrow:before {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
-
-  #left-arrow:before {
-    position: absolute;
-    content: "";
-    width: 100%;
-
-    height: 100%;
-    border-radius: 50%;
-  }
-
-  .button-container button>svg {
-    width: 25%;
-    height: auto;
-  }
-
-  #right-arrow svg {
-    transform: rotate(180deg);
-  }
-
-  #progress-bar-container {
-    position: relative;
-    grid-column: 3 / 6;
-    align-self: center;
-    width: 90%;
-    height: 0.2rem;
-    justify-self: center;
-    border-radius: 0.2rem;
-    background-color: var(--color-21);
-  }
-
-  #progress-bar {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    transform-origin: left;
-  }
-
-  @media (max-width: 45em) {
-    #left-arrow {
-      grid-column: 1;
-      grid-row: 1;
-    }
-
-    #right-arrow {
-      grid-column: 5;
-      grid-row: 1;
-    }
-
-    #progress-bar-container {
-      position: relative;
-      grid-column: 2 / 5;
-      align-self: center;
-      width: 90%;
-      height: 0.2rem;
-      justify-self: center;
-      border-radius: 0.2rem;
-      background-color: var(--color-21);
-    }
-  }
-}
-
-
 /* 📍 footer */
 .footer {
   position: relative;
@@ -1172,14 +978,14 @@ body {
 }
 
 
-.section01_btn {
+.footer_btn {
   height: 120px;
   text-align: center;
   line-height: 120px;
   cursor: pointer;
 }
 
-.section01_btn {
+.footer_btn {
   nav ul li {
     color: #000;
     font-size: 80px;
@@ -1226,5 +1032,66 @@ body {
 
   nav ul li span:nth-child(4) {
     --n: 4;
+  }
+}
+
+
+
+
+/* 📍 로딩 페이지 */
+.progress {
+  position: fixed;
+  color: rgb(130, 130, 130);
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+  background-image: url(./img/loadingimg.PNG);
+  z-index: 1;
+}
+
+.progress .progress-bar {
+  border-top: 3px solid rgb(130, 130, 130);
+  position: absolute;
+  top: 50%;
+  width: 0%;
+}
+
+.progress .progress-text {
+  position: absolute;
+  top: 53%;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.progress-complete .progress-bar {
+  border-top-color: rgb(255, 255, 255);
+}
+
+
+/* 📍 emoji */
+.emowrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 170px;
+}
+
+.emowrap img {
+  width: 130px;
+  animation: loadingimg 2s infinite;
+}
+
+@keyframes loadingimg{
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }

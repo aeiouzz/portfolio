@@ -185,215 +185,31 @@ function deactivateBar() {
 gsap.to(".panel", {
   scrollTrigger: {
     trigger: ".page3",
-    start: "top 50%", // .page3의 상단이 뷰포트의 50% 지점에 도달했을 때 시작
-    toggleActions: "play reset",
+    start: "top 50%",
+    // toggleActions: "play reset",
     onToggle: function (self) {
       if (self.isActive) {
-        // 현재 페이지가 보이는 상태
+
         gsap.to(".panel", {
-          x: "0%",
+          scale: 1,
           duration: 1,
           onComplete: function () {
-            // 패널이 오른쪽에서 슬라이드로 나타나는 애니메이션이 완료된 후에 3초 뒤에 activateBar() 함수 실행
-            gsap.delayedCall(0.1, function () {
+            gsap.delayedCall(0.08, function () {
               activateBar();
               skillCountWidth();
             });
           },
         });
-        // 1초 후에 이미지 요소들이 차례대로 나타나도록 설정
       } else {
-        // 현재 페이지가 보이지 않는 상태
         gsap.to(".panel", {
-          x: "100%",
+          scale: 0,
           duration: 1,
-        }); // 패널을 오른쪽으로 슬라이드하여 감추기
+        });
         deactivateBar();
       }
     },
   },
 });
-
-/* gsap.to(".panel", {
-  scale: 1,
-  scrollTrigger: {
-    trigger: ".page3",
-    start: "top 50%", 
-    // toggleActions: "play reset",
-    onToggle: function (self) {
-      if (self.isActive) {
-        // 페이지가 보이는 상태
-        gsap.to(".panel", {
-          scale: 1, 
-          duration: 1, 
-        });
-      } else {
-    
-        gsap.to(".panel", {
-          scale: 0, 
-          duration: 1,
-        });
-      }
-    },
-  },
-}); */
-
-
-
-// 📍 page7
-/* document.addEventListener("DOMContentLoaded", function () {
-  const leftArrow = document.getElementById("left-arrow");
-  const rightArrow = document.getElementById("right-arrow");
-
-  const imagesContainer = document.getElementById("image-container");
-  let images = document.querySelectorAll(".model-images");
-
-  let cloneLastImage = images[images.length - 1].cloneNode(true);
-  imagesContainer.prepend(cloneLastImage);
-
-  const imageCount = images.length;
-  let currentImage = 0;
-
-  let firstImageIndexValue = 0;
-  let currentFirstImage = images[0];
-  let currentLastImage = images[images.length - 1];
-
-  function buttonPressedAnimation(buttonId) {
-    let rule = CSSRulePlugin.getRule(buttonId);
-    let tl = gsap.timeline();
-
-    gsap.set(rule, {
-      cssRule: {
-        scale: 1,
-        border: "solid 0.1rem #fff",
-        opacity: 0,
-      },
-    });
-
-    tl.to(rule, {
-      duration: .2,
-      cssRule: {
-        scale: 1.5,
-        opacity: 1,
-      },
-    });
-
-    tl.to(rule, {
-      duration: 0.2,
-      cssRule: {
-        scale: 3,
-        opacity: 0,
-      },
-      ease: "power2.out",
-    });
-
-    tl.to(rule, {
-      duration: 0.2,
-      cssRule: {
-        scale: 1,
-      },
-      ease: "power2.in",
-    });
-  }
-
-  function staggerImageAnimation(fromValue, toValue, direction) {
-    gsap.fromTo(
-      ".model-images", {
-        translate: fromValue,
-      }, {
-        translate: toValue,
-        stagger: {
-          from: direction,
-          amount: 0.3,
-        },
-        ease: "power2.inOut",
-      }
-    );
-  }
-
-  function progressBarAnimation() {
-    gsap.to("#progress-bar", {
-      scaleX: `${1 / imageCount + (currentImage % imageCount) / imageCount}`,
-      duration: 0.3 * ((imageCount - 1) / 2),
-      ease: "power2.inOut",
-    });
-  }
-
-  gsap.set("#progress-bar", {
-    scaleX: `${1 / imageCount + currentImage / imageCount}`,
-  });
-
-
-  // Image Placements
-  function moveImagesTotheLeft() {
-    images = document.querySelectorAll(".model-images");
-    let cloneFirstImage = images[1].cloneNode(true);
-    imagesContainer.append(cloneFirstImage);
-
-    let fromValue = `0`;
-    let toValue = `calc(-100% - 0.5rem) `;
-
-    staggerImageAnimation(fromValue, toValue, "start");
-    images[0].remove();
-  }
-
-  function moveImagesTotheRight() {
-    images = document.querySelectorAll(".model-images");
-    let cloneLastImage = images[images.length - 2].cloneNode(true);
-
-    imagesContainer.prepend(cloneLastImage);
-    let fromValue = `calc(-200% - 1rem)`;
-    let toValue = `calc(-100% - 0.5rem) `;
-    staggerImageAnimation(fromValue, toValue, "end");
-    images[images.length - 1].remove();
-  }
-
-
-  // Event Listeners
-  leftArrow.addEventListener("click", () => {
-    moveImagesTotheRight();
-    buttonPressedAnimation("#left-arrow:before");
-    gsap.set("#progress-bar", {
-      scaleX: `${1 / imageCount + (currentImage % imageCount) / imageCount}`,
-    });
-    currentImage = (currentImage - 1) % imageCount;
-
-    if (currentImage < 0) {
-      currentImage = 3;
-    }
-
-    progressBarAnimation();
-  });
-
-
-  rightArrow.addEventListener("click", () => {
-    moveImagesTotheLeft();
-    buttonPressedAnimation("#right-arrow:before");
-    gsap.set("#progress-bar", {
-      scaleX: `${1 / imageCount + (currentImage % imageCount) / imageCount}`,
-    });
-
-    currentImage = (currentImage + 1) % imageCount;
-
-    progressBarAnimation();
-  });
-
-  setInterval(function () {
-    rightArrow.click();
-  }, 4000);
-
-
-  gsap.to(".page7", {
-    backgroundColor: "#29C1A2",
-    color: "#fff",
-    scrollTrigger: {
-      trigger: ".page7",
-      start: "top 40%",
-      end: "bottom top",
-      toggleActions: "play none none reverse",
-    },
-  });
-}); */
 
 
 // 📍 footer sticker
@@ -428,7 +244,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
 gsap.to(".page3_img img", {
   opacity: 0, // 시작 시 크기
   scrollTrigger: {
@@ -459,6 +274,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var aboutLink = document.querySelector('.footer_about');
   var workLink = document.querySelector('.footer_work');
   var mainLink = document.querySelector('.footer_main');
+  var contactLink = document.querySelector('.footer_contact');
 
   if (aboutLink) {
     aboutLink.addEventListener('click', function () {
@@ -478,6 +294,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  if (contactLink) {
+    mainLink.addEventListener('click', function () {
+      scrollToElement('footer');
+    });
+  }
+
   function scrollToElement(elementSelector) {
     var element = document.querySelector(elementSelector);
     if (element) {
@@ -487,3 +309,46 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 });
+
+
+
+
+
+// 📍 로딩 화면
+
+let container = document.querySelector('#progress');
+let progressBar = document.querySelector('.progress-bar');
+let progressText = document.querySelector('.progress-text');
+
+var imgLoad = imagesLoaded('body');
+//console.log(imgLoad)
+let imgTotal = imgLoad.images.length;
+let imgLoaded = 0;
+let current = 0;
+let progressTimer;
+let topValue;
+
+progressTimer = setInterval(updateProgress, 1000 / 60)
+imgLoad.on('progress', function () { //이미지 로드되는 중간중간 할일
+  imgLoaded++;
+
+});
+
+function updateProgress() {
+  let target = (imgLoaded / imgTotal) * 100
+  console.log(target)
+  current += (target - current) * 0.01; // 이미지가 더 많으면 로드가 더 되게 값을 늘려준다. ex)0.01
+
+  progressBar.style.width = current + "%";
+  progressText.innerHTML = Math.ceil(current) + "%"; //Math.ceil 올림
+
+  if (current > 99.9) {
+    clearInterval(progressTimer);
+    container.classList.add('progress-complete');
+    progressBar.style.width = "100%";
+    gsap.to(container, {
+      duration: 0.3,
+      yPercent: -100
+    })
+  }
+}
